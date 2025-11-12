@@ -1,5 +1,6 @@
 {
     "require": {
-        "laravel/passport": "^12.0"
+        "laravel/passport": "^12.0",
+        "darkaonline/l5-swagger": "^9.0"
     }
 }
