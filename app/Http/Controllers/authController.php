@@ -126,4 +126,35 @@ class AuthController extends Controller
         'token' => $token,
     ]);
 }
+  /**
+ * @OA\Post(
+ *     path="/logout",
+ *     summary="Cerrar sesión del usuario autenticado",
+ *     tags={"Autentificación"},
+ *     security={{"passport": {}}},
+ *     @OA\Response(
+ *         response=200,
+ *         description="Sesión cerrada correctamente",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string", example="Sesión cerrada correctamente")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=401,
+ *         description="No autorizado o token inválido"
+ *     )
+ * )
+ */
+
+
+    public function logout(Request $request)
+    {
+        $usuario=$request->user();
+        $token =$usuario->token();
+        $token->revoke();
+
+        return response()->json([
+            'message'=>'Sesión cerrada correctamente'
+        ]);
+    }
 }    
