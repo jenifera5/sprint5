@@ -12,7 +12,7 @@ Route::post('/login' ,[AuthController::class,'login']);
 Route::middleware('auth:api')->group(function() {
     Route::post('/logout' ,[AuthController::class,'logout']);
      //Endpoints de solo lectura (usuarios normales y admin)
-
+    Route::get('/books' ,[LibroController::class,'index']);
      
       //  Endpoints solo para administradores
     Route::middleware('role:admin')->group(function () {

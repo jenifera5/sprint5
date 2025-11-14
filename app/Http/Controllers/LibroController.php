@@ -119,4 +119,7 @@ class  LibroController extends Controller
             'libro' => $book->load('categorias'),
         ], 201);
     }
+
+
+    
 }
