@@ -74,4 +74,56 @@ class AuthController extends Controller
         ], 201);
 
     }
+
+
+        /**
+ * @OA\Post(
+ *     path="/login",
+ *     summary="Iniciar sesión de usuario",
+ *     tags={"Autentificación"},
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *             required={"email","password"},
+ *             @OA\Property(property="email", type="string", format="email", example="jenifer@example.com"),
+ *             @OA\Property(property="password", type="string", example="123456")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Inicio de sesión exitoso",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="usuario", type="object",
+ *                 @OA\Property(property="id", type="integer", example=1),
+ *                 @OA\Property(property="nombre", type="string", example="Jenifer"),
+ *                 @OA\Property(property="email", type="string", example="jenifer@example.com"),
+ *                 @OA\Property(property="rol", type="string", example="admin")
+ *             ),
+ *             @OA\Property(property="token", type="string", example="eyJ0eXAiOiJKV1QiLCJh...")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=401,
+ *         description="Credenciales incorrectas"
+ *     )
+ * )
+ */
+
+
+   public function login(Request $request)
+{
+    $credenciales = $request->only('email', 'password');
+    
+    if (!Auth::attempt($credenciales)) {
+        return response()->json(['error' => 'Credenciales incorrectas'], 401);  // ← UNA SOLA LÍNEA
+    }
+    
+    $usuario = Auth::user();
+    $token = $usuario->createToken('API Token')->accessToken;
+    
+    return response()->json([
+        'usuario' => $usuario,
+        'token' => $token,
+    ]);
+}
 }    

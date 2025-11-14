@@ -7,3 +7,4 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\PrestamoController;
 
 Route::post('/register' ,[AuthController::class,'register']);
+Route::post('/login' ,[AuthController::class,'login']);
