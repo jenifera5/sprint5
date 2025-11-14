@@ -17,6 +17,7 @@ Route::middleware('auth:api')->group(function() {
       //  Endpoints solo para administradores
     Route::middleware('role:admin')->group(function () {
         Route::post('/books', [LibroController::class, 'store']);
+        Route::put('/books/{id}', [LibroController::class, 'update']);
     });
 
 });
