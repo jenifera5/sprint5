@@ -10,6 +10,41 @@ use Illuminate\Http\Request;
 class CategoriaController extends Controller
 {
 
+    /**
+ * @OA\Get(
+ *     path="/categories",
+ *     summary="Listar todas las categorías",
+ *     tags={"Categorías"},
+ *     security={{"passport": {}}},
+ *     @OA\Response(
+ *         response=200,
+ *         description="Lista de categorías obtenida correctamente",
+ *         @OA\JsonContent(
+ *             type="array",
+ *             @OA\Items(
+ *                 @OA\Property(property="id", type="integer", example=1),
+ *                 @OA\Property(property="nombre", type="string", example="Fantasía"),
+ *                 @OA\Property(property="descripcion", type="string", example="Libros de fantasía y aventuras"),
+ *                 @OA\Property(
+ *                     property="libros",
+ *                     type="array",
+ *                     @OA\Items(
+ *                         @OA\Property(property="id", type="integer", example=3),
+ *                         @OA\Property(property="titulo", type="string", example="Harry Potter"),
+ *                         @OA\Property(property="autor", type="string", example="J.K. Rowling")
+ *                     )
+ *                 )
+ *             )
+ *         )
+ *     )
+ * )
+ */
+
+    public function index()
+    {
+        $categorias = Categoria::with('libros')->get();//incluye libros asociados por  categorias
+        return response()->json($categorias);
+    }
 
 /**
  * @OA\Post(
