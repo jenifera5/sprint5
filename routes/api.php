@@ -18,6 +18,7 @@ Route::middleware('auth:api')->group(function() {
     Route::middleware('role:admin')->group(function () {
         Route::post('/books', [LibroController::class, 'store']);
         Route::put('/books/{id}', [LibroController::class, 'update']);
+        Route::delete('/books/{id}', [LibroController::class, 'destroy']);
     });
 
 });

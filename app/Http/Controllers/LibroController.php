@@ -202,6 +202,46 @@ class  LibroController extends Controller
             'libro' => $book->load('categorias'),
         ]);
     }
+      // 🔹 Eliminar libro (solo admin)
+    /**
+ * @OA\Delete(
+ *     path="/books/{id}",
+ *     summary="Eliminar un libro por ID",
+ *     tags={"Libros"},
+ *     security={{"passport": {}}},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="ID del libro a eliminar",
+ *         @OA\Schema(type="integer", example=1)
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Libro eliminado correctamente",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string", example="Libro eliminado correctamente")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Libro no encontrado"
+ *     )
+ * )
+ */
+    public function destroy(string $id)
+    {
+        $book = Libro::find($id);
+        if (!$book) {
+            return response()->json(['error' => 'Libro no encontrado'], 404);
+        }
+
+        $book->delete();
+
+        return response()->json([
+            'message' => 'Libro eliminado correctamente'
+        ]);
+    }
 
     
 }
