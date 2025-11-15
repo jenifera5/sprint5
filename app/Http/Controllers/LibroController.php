@@ -293,7 +293,7 @@ class  LibroController extends Controller
         ]);
         
     }
-        // 🔹 Libros más populares (Top 5 más prestados)
+       // 🔹 Libros más populares (Top 5 más prestados)
     /**
  * @OA\Get(
  *     path="/books/stats/popular",
@@ -343,5 +343,4 @@ class  LibroController extends Controller
             'data' => $popularBooks,
         ]);
     }
-    
 }
