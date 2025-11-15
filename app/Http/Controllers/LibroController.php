@@ -293,5 +293,55 @@ class  LibroController extends Controller
         ]);
         
     }
+        // 🔹 Libros más populares (Top 5 más prestados)
+    /**
+ * @OA\Get(
+ *     path="/books/stats/popular",
+ *     summary="Obtener los 5 libros más prestados",
+ *     tags={"Libros"},
+ *     security={{"passport": {}}},
+ *     @OA\Response(
+ *         response=200,
+ *         description="Top 5 libros más prestados obtenidos correctamente",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string", example="Top 5 libros más prestados obtenidos correctamente"),
+ *             @OA\Property(
+ *                 property="data",
+ *                 type="array",
+ *                 @OA\Items(
+ *                     @OA\Property(property="id", type="integer", example=3),
+ *                     @OA\Property(property="titulo", type="string", example="Cien años de soledad"),
+ *                     @OA\Property(property="autor", type="string", example="Gabriel García Márquez"),
+ *                     @OA\Property(property="anio", type="integer", example=1967),
+ *                     @OA\Property(property="disponibles", type="integer", example=2),
+ *                     @OA\Property(property="prestamos_count", type="integer", example=15)
+ *                 )
+ *             )
+ *         )
+ *     )
+ * )
+ */
+    public function mostPopular()
+    {
+        $popularBooks = DB::table('libros')
+            ->leftJoin('prestamos', 'libros.id', '=', 'prestamos.id_libro')
+            ->select(
+                'libros.id',
+                'libros.titulo',
+                'libros.autor',
+                'libros.anio',
+                'libros.disponibles',
+                DB::raw('COUNT(prestamos.id) AS prestamos_count')
+            )
+            ->groupBy('libros.id', 'libros.titulo', 'libros.autor', 'libros.anio', 'libros.disponibles')
+            ->orderByDesc('prestamos_count')
+            ->limit(5)
+            ->get();
+
+        return response()->json([
+            'message' => 'Top 5 libros más prestados obtenidos correctamente',
+            'data' => $popularBooks,
+        ]);
+    }
     
 }

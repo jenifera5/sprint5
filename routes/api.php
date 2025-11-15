@@ -14,6 +14,7 @@ Route::middleware('auth:api')->group(function() {
      //Endpoints de solo lectura (usuarios normales y admin)
     Route::get('/books' ,[LibroController::class,'index']);
     Route::get('/books/search' ,[LibroController::class,'search']);
+    Route::get('/books/stats/popular' ,[LibroController::class,'mostPopular']);
      
       //  Endpoints solo para administradores
     Route::middleware('role:admin')->group(function () {
