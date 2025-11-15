@@ -8,7 +8,7 @@ use App\Models\Libro;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Passport\ClientRepository;
 
-class QuitarLibroTest extends TestCase
+class EliminarLibroTest extends TestCase
 {
     use RefreshDatabase;
 

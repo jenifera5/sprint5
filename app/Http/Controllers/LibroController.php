@@ -242,6 +242,56 @@ class  LibroController extends Controller
             'message' => 'Libro eliminado correctamente'
         ]);
     }
+   // 🔹 Buscar libro por título o autor
+    /**
+ * @OA\Get(
+ *     path="/books/search",
+ *     summary="Buscar libros por título o autor",
+ *     tags={"Libros"},
+ *     security={{"passport": {}}},
+ *     @OA\Parameter(
+ *         name="query",
+ *         in="query",
+ *         required=true,
+ *         description="Término de búsqueda (título o autor)",
+ *         @OA\Schema(type="string", example="Cervantes")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Resultados obtenidos correctamente",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string", example="Resultados obtenidos correctamente"),
+ *             @OA\Property(
+ *                 property="data",
+ *                 type="array",
+ *                 @OA\Items(
+ *                     @OA\Property(property="id", type="integer", example=1),
+ *                     @OA\Property(property="titulo", type="string", example="Don Quijote de la Mancha"),
+ *                     @OA\Property(property="autor", type="string", example="Miguel de Cervantes"),
+ *                     @OA\Property(property="anio", type="integer", example=1605),
+ *                     @OA\Property(property="disponibles", type="integer", example=4)
+ *                 )
+ *             )
+ *         )
+ *     )
+ * )
+ */
 
+
+    public function search(Request $request)
+    {
+         $query = $request->input('query');
+
+        $results = Libro::with('categorias')
+            ->where('titulo', 'like', "%{$query}%")
+            ->orWhere('autor', 'like', "%{$query}%")
+            ->get();
+
+        return response()->json([
+            'message' => 'Resultados obtenidos correctamente',
+            'data' => $results,
+        ]);
+        
+    }
     
 }
