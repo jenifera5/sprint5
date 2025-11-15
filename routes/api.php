@@ -15,12 +15,14 @@ Route::middleware('auth:api')->group(function() {
     Route::get('/books' ,[LibroController::class,'index']);
     Route::get('/books/search' ,[LibroController::class,'search']);
     Route::get('/books/stats/popular' ,[LibroController::class,'mostPopular']);
+    
      
       //  Endpoints solo para administradores
     Route::middleware('role:admin')->group(function () {
         Route::post('/books', [LibroController::class, 'store']);
         Route::put('/books/{id}', [LibroController::class, 'update']);
         Route::delete('/books/{id}', [LibroController::class, 'destroy']);
+        Route::post('/categories', [CategoriaController::class, 'store']);
     });
 
 });
