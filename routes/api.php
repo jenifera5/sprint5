@@ -24,6 +24,7 @@ Route::middleware('auth:api')->group(function() {
         Route::delete('/books/{id}', [LibroController::class, 'destroy']);
         Route::post('/categories', [CategoriaController::class, 'store']);
         Route::put('/categories/{id}', [CategoriaController::class, 'update']);
+        Route::delete('/categories/{id}', [CategoriaController::class, 'destroy']);
     });
 
 });

@@ -160,7 +160,45 @@ class CategoriaController extends Controller
         ]);
     }
 
+          /**
+ * @OA\Delete(
+ *     path="/categories/{id}",
+ *     summary="Eliminar una categoría",
+ *     tags={"Categorías"},
+ *     security={{"passport": {}}},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="ID de la categoría a eliminar",
+ *         @OA\Schema(type="integer", example=2)
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Categoría eliminada correctamente",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string", example="Categoria eliminada correctamente")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Categoría no encontrada"
+ *     )
+ * )
+ */
 
+    public function destroy(string $id)
+    {
+        $categoria = Categoria::find($id);
+        if (!$categoria) {
+            return response()->json(['error'=>'Categoria no encontrada'],404);
+        }
+        $categoria->delete();
+        return response()->json([
+            'message' => 'Categoria eliminada correctamente'
+        ]);
+      
+    }
 
 }
    
