@@ -96,5 +96,71 @@ class CategoriaController extends Controller
             'categoria'=>$categoria
         ],201);
     }
+
+        /**
+ * @OA\Put(
+ *     path="/categories/{id}",
+ *     summary="Actualizar una categoría existente",
+ *     tags={"Categorías"},
+ *     security={{"passport": {}}},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="ID de la categoría a actualizar",
+ *         @OA\Schema(type="integer", example=3)
+ *     ),
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *             required={"nombre","descripcion"},
+ *             @OA\Property(property="nombre", type="string", example="Romance"),
+ *             @OA\Property(property="descripcion", type="string", example="Novelas románticas y dramáticas")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Categoría actualizada correctamente",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string", example="Categoria actualizada correctamente"),
+ *             @OA\Property(property="categoria", type="object",
+ *                 @OA\Property(property="id", type="integer", example=3),
+ *                 @OA\Property(property="nombre", type="string", example="Romance"),
+ *                 @OA\Property(property="descripcion", type="string", example="Novelas románticas y dramáticas")
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Categoría no encontrada"
+ *     )
+ * )
+ */
+
+
+    public function update(Request $request, string $id)
+    {
+        $categoria = Categoria::find($id);
+        if (!$categoria) {
+            return response()->json(['error'=>'Categoria no encontrada'],404);
+        }
+      
+         $request->validate([
+            'nombre' =>'required|string|max:45',
+            'descripcion'=>'required|string|max:100',
+        ]);
+        $categoria ->update([
+            'nombre'=>$request->nombre,
+            'descripcion'=>$request->descripcion,
+        ]);
+        
+        return response()->json([
+            'message' => 'Categoria actualizada correctamente',
+            'categoria'=>$categoria
+        ]);
+    }
+
+
+
 }
    

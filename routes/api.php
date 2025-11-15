@@ -23,6 +23,7 @@ Route::middleware('auth:api')->group(function() {
         Route::put('/books/{id}', [LibroController::class, 'update']);
         Route::delete('/books/{id}', [LibroController::class, 'destroy']);
         Route::post('/categories', [CategoriaController::class, 'store']);
+        Route::put('/categories/{id}', [CategoriaController::class, 'update']);
     });
 
 });
