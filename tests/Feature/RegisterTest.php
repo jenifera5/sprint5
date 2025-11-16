@@ -15,7 +15,6 @@ class RegisterTest extends TestCase
     {
         parent::setUp();
         
-        // Crear cliente personal para Passport
         $repo = new ClientRepository();
         $repo->createPersonalAccessClient(
             null,
@@ -31,7 +30,6 @@ class RegisterTest extends TestCase
             'nombre' => 'Test User',
             'email' => 'test@example.com',
             'password' => '123456',
-            'password_confirmation' => '123456',
         ]);
 
         $response->assertStatus(201)
@@ -62,7 +60,6 @@ class RegisterTest extends TestCase
             'nombre' => 'Test User',
             'email' => 'invalid-email',
             'password' => '123456',
-            'password_confirmation' => '123456',
         ]);
 
         $response->assertStatus(422)
@@ -70,13 +67,12 @@ class RegisterTest extends TestCase
     }
 
     /** @test */
-    public function it_validates_password_confirmation()
+    public function it_validates_password_length()
     {
         $response = $this->postJson('/api/register', [
             'nombre' => 'Test User',
             'email' => 'test@example.com',
-            'password' => '123456',
-            'password_confirmation' => 'different',
+            'password' => '123',
         ]);
 
         $response->assertStatus(422)
@@ -92,7 +88,6 @@ class RegisterTest extends TestCase
             'nombre' => 'Test User',
             'email' => 'existing@example.com',
             'password' => '123456',
-            'password_confirmation' => '123456',
         ]);
 
         $response->assertStatus(422)
