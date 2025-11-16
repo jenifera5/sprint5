@@ -1,0 +1,34 @@
+<?php
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LibroController;
+use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\PrestamoController;
+
+Route::post('/register' ,[AuthController::class,'register']);
+Route::post('/login' ,[AuthController::class,'login']);
+
+Route::middleware('auth:api')->group(function() {
+    Route::post('/logout' ,[AuthController::class,'logout']);
+     //Endpoints de solo lectura (usuarios normales y admin)
+    Route::get('/books' ,[LibroController::class,'index']);
+    Route::get('/books/search' ,[LibroController::class,'search']);
+    Route::get('/books/stats/popular' ,[LibroController::class,'mostPopular']);
+    Route::get('/categories' ,[CategoriaController::class,'index']);
+    Route::get('/loans' ,[PrestamoController::class,'index']);
+     
+      //  Endpoints solo para administradores
+    Route::middleware('role:admin')->group(function () {
+        Route::post('/books', [LibroController::class, 'store']);
+        Route::put('/books/{id}', [LibroController::class, 'update']);
+        Route::delete('/books/{id}', [LibroController::class, 'destroy']);
+        Route::post('/categories', [CategoriaController::class, 'store']);
+        Route::put('/categories/{id}', [CategoriaController::class, 'update']);
+        Route::delete('/categories/{id}', [CategoriaController::class, 'destroy']);
+        Route::post('/loans', [PrestamoController::class, 'store']);
+        Route::put('/loans/{id}', [PrestamoController::class, 'update']);
+        Route::delete('/loans/{id}', [PrestamoController::class, 'destroy']);
+    });
+
+});
