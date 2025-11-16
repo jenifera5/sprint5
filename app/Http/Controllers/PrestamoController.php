@@ -11,7 +11,52 @@ use Illuminate\Http\Request;
 class PrestamoController extends Controller
 {
  
+   /**
+ * @OA\Get(
+ *     path="/loans",
+ *     summary="Listar todos los préstamos",
+ *     tags={"Préstamos"},
+ *     security={{"passport": {}}},
+ *     @OA\Response(
+ *         response=200,
+ *         description="Lista de préstamos obtenida correctamente",
+ *         @OA\JsonContent(
+ *             type="array",
+ *             @OA\Items(
+ *                 @OA\Property(property="id", type="integer", example=1),
+ *                 @OA\Property(property="id_usuario", type="integer", example=3),
+ *                 @OA\Property(property="id_libro", type="integer", example=5),
+ *                 @OA\Property(property="fecha_prestamo", type="string", format="date", example="2025-10-10"),
+ *                 @OA\Property(property="fecha_devolucion", type="string", format="date", example="2025-10-25"),
+ *                 @OA\Property(property="estado", type="string", example="pendiente"),
+ *                 @OA\Property(property="usuario", type="object",
+ *                     @OA\Property(property="nombre", type="string", example="Jenifer")
+ *                 ),
+ *                 @OA\Property(property="libro", type="object",
+ *                     @OA\Property(property="titulo", type="string", example="Dune")
+ *                 )
+ *             )
+ *         )
+ *     )
+ * )
+ */
 
+   public function index(Request $request)
+{
+    $usuario = $request->user();
+    
+    // Si es admin, mostrar todos los préstamos
+    if ($usuario->rol === 'admin') {
+        $prestamos = Prestamo::with('usuario', 'libro')->get();
+    } else {
+        // Si es usuario normal, mostrar solo sus préstamos
+        $prestamos = Prestamo::with('usuario', 'libro')
+                            ->where('id_usuario', $usuario->id)
+                            ->get();
+    }
+    
+    return response()->json($prestamos);
+}
   /**
  * @OA\Post(
  *     path="/loans",
