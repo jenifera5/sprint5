@@ -31,7 +31,7 @@ class RegisterTest extends TestCase
             'nombre' => 'Test User',
             'email' => 'test@example.com',
             'password' => '123456',
-            'password_confirmation' => '123456',
+           
         ]);
 
         $response->assertStatus(201)
