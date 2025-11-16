@@ -9,7 +9,7 @@ use App\Models\Prestamo;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Passport\ClientRepository;
 
-class DevolverPrestamoTest extends TestCase
+class ActualizarPrestamoTest extends TestCase
 {
     use RefreshDatabase;
 

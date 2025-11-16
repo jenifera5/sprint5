@@ -201,5 +201,48 @@ class PrestamoController extends Controller
         'prestamo' => $prestamo
     ]);
 }
+/**
+ * @OA\Delete(
+ *     path="/loans/{id}",
+ *     summary="Eliminar un préstamo",
+ *     tags={"Préstamos"},
+ *     security={{"passport": {}}},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="ID del préstamo a eliminar",
+ *         @OA\Schema(type="integer", example=7)
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Préstamo eliminado correctamente",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string", example="Prestamo eliminado correctamente")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Préstamo no encontrado"
+ *     )
+ * )
+ */
+
+
+    
+    public function destroy(string $id)
+    {
+         $prestamo = Prestamo::find($id);
+        if (!$prestamo) {
+            return response()->json(['error'=>'Prestamo no encontrado'
+            
+
+            ],404);
+        }
+        $prestamo->delete();
+        return response()->json([
+            'message'=>'Prestamo eliminado correctamente'
+        ]);
+    }
     
 }

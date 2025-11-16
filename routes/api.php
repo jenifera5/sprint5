@@ -28,7 +28,7 @@ Route::middleware('auth:api')->group(function() {
         Route::delete('/categories/{id}', [CategoriaController::class, 'destroy']);
         Route::post('/loans', [PrestamoController::class, 'store']);
         Route::put('/loans/{id}', [PrestamoController::class, 'update']);
-        
+        Route::delete('/loans/{id}', [PrestamoController::class, 'destroy']);
     });
 
 });
