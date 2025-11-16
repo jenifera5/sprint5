@@ -381,18 +381,18 @@ php artisan test
 ### Ejecutar tests específicos
 
 ```bash
-# Tests de autenticación
+# Tests de autenticación creados por funcionalidad
 php artisan test --filter RegisterTest
 php artisan test --filter LoginTest
 
 # Tests de libros
-php artisan test --filter LibroControllerTest
+php artisan test --filter CrearLibroTest
 
 # Tests de categorías
-php artisan test --filter CategoriaControllerTest
+php artisan test --filter CrearCategoriaTest
 
 # Tests de préstamos
-php artisan test --filter PrestamoControllerTest
+php artisan test --filter CrearPrestamoTest
 ```
 
 ### Cobertura de Tests
