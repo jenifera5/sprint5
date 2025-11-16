@@ -56,7 +56,7 @@ class AuthController extends Controller
 
             'nombre'=>'required|string|max:255',
             'email'=>'required|string|email|max:255|unique:usuarios',
-            'password'=>'required|string|min:6|confirmed',
+            'password'=>'required|string|min:6',
             'rol'      => 'in:admin,usuario'
         ]);
         $usuario = Usuario::create([
@@ -74,9 +74,7 @@ class AuthController extends Controller
         ], 201);
 
     }
-
-
-        /**
+    /**
  * @OA\Post(
  *     path="/login",
  *     summary="Iniciar sesión de usuario",
@@ -110,23 +108,24 @@ class AuthController extends Controller
  */
 
 
-   public function login(Request $request)
-{
-    $credenciales = $request->only('email', 'password');
-    
-    if (!Auth::attempt($credenciales)) {
-        return response()->json(['error' => 'Credenciales incorrectas'], 401);  // ← UNA SOLA LÍNEA
+    public function login(Request $request)
+    {
+        $credenciales = $request->only('email','password');
+        if(!Auth::attempt($credenciales))
+        {
+            return response()->json(['error'=>'Credenciales
+             incorrectas'],401);
+        }
+        $usuario = Auth::user();
+        $token   = $usuario->createToken('API Token')->accessToken;
+
+        return response()->json([
+            'usuario' => $usuario,
+            'token'   => $token,
+        ]);
+
     }
-    
-    $usuario = Auth::user();
-    $token = $usuario->createToken('API Token')->accessToken;
-    
-    return response()->json([
-        'usuario' => $usuario,
-        'token' => $token,
-    ]);
-}
-  /**
+    /**
  * @OA\Post(
  *     path="/logout",
  *     summary="Cerrar sesión del usuario autenticado",
@@ -145,16 +144,20 @@ class AuthController extends Controller
  *     )
  * )
  */
-
-
-    public function logout(Request $request)
-    {
-        $usuario=$request->user();
-        $token =$usuario->token();
+public function logout(Request $request)
+{
+    $usuario = $request->user();
+    $token = $usuario->token();
+    
+    // Solo revocar si el token existe y tiene ID
+    if ($token && $token->id) {
         $token->revoke();
-
-        return response()->json([
-            'message'=>'Sesión cerrada correctamente'
-        ]);
     }
-}    
+    
+    return response()->json([
+        'message' => 'Sesión cerrada correctamente'
+    ]);
+}
+
+   
+}
