@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit4d64ddccdf9de299dce6e021428aa3ef
+class ComposerStaticInitd54fe94460cb993e305d25f02a88e45c
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
@@ -377,8 +377,8 @@ class ComposerStaticInit4d64ddccdf9de299dce6e021428aa3ef
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -430,8 +430,8 @@ class ComposerStaticInit4d64ddccdf9de299dce6e021428aa3ef
         ),
         'Nette\\' => 
         array (
-            0 => __DIR__ . '/..' . '/nette/schema/src',
-            1 => __DIR__ . '/..' . '/nette/utils/src',
+            0 => __DIR__ . '/..' . '/nette/utils/src',
+            1 => __DIR__ . '/..' . '/nette/schema/src',
         ),
         'Monolog\\' => 
         array (
@@ -623,10 +623,17 @@ class ComposerStaticInit4d64ddccdf9de299dce6e021428aa3ef
 
     public static $classMap = array (
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
+        'App\\Http\\Controllers\\CategoriaController' => __DIR__ . '/../..' . '/app/Http/Controllers/CategoriaController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\LibroController' => __DIR__ . '/../..' . '/app/Http/Controllers/LibroController.php',
+        'App\\Http\\Controllers\\PrestamoController' => __DIR__ . '/../..' . '/app/Http/Controllers/PrestamoController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\CheckRole' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckRole.php',
-        'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
+        'App\\Models\\Categoria' => __DIR__ . '/../..' . '/app/Models/Categoria.php',
+        'App\\Models\\Libro' => __DIR__ . '/../..' . '/app/Models/Libro.php',
+        'App\\Models\\Prestamo' => __DIR__ . '/../..' . '/app/Models/Prestamo.php',
+        'App\\Models\\Usuario' => __DIR__ . '/../..' . '/app/Models/Usuario.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
@@ -749,6 +756,16 @@ class ComposerStaticInit4d64ddccdf9de299dce6e021428aa3ef
         'Cron\\HoursField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/HoursField.php',
         'Cron\\MinutesField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MinutesField.php',
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
+        'Database\\Factories\\CategoriaFactory' => __DIR__ . '/../..' . '/database/factories/CategoriaFactory.php',
+        'Database\\Factories\\LibroFactory' => __DIR__ . '/../..' . '/database/factories/LibroFactory.php',
+        'Database\\Factories\\PrestamoFactory' => __DIR__ . '/../..' . '/database/factories/PrestamoFactory.php',
+        'Database\\Factories\\UsuarioFactory' => __DIR__ . '/../..' . '/database/factories/UsuarioFactory.php',
+        'Database\\Seeders\\CategoriaSeeder' => __DIR__ . '/../..' . '/database/seeders/CategoriaSeeder.php',
+        'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
+        'Database\\Seeders\\LibroSeeder' => __DIR__ . '/../..' . '/database/seeders/LibroSeeder.php',
+        'Database\\Seeders\\PassportClientSeeder' => __DIR__ . '/../..' . '/database/seeders/PassportClientSeeder.php',
+        'Database\\Seeders\\PrestamoSeeder' => __DIR__ . '/../..' . '/database/seeders/PrestamoSeeder.php',
+        'Database\\Seeders\\UsuarioSeeder' => __DIR__ . '/../..' . '/database/seeders/UsuarioSeeder.php',
         'DateError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateError.php',
         'DateException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateException.php',
         'DateInvalidOperationException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateInvalidOperationException.php',
@@ -7331,7 +7348,24 @@ class ComposerStaticInit4d64ddccdf9de299dce6e021428aa3ef
         'Termwind\\ValueObjects\\Node' => __DIR__ . '/..' . '/nunomaduro/termwind/src/ValueObjects/Node.php',
         'Termwind\\ValueObjects\\Style' => __DIR__ . '/..' . '/nunomaduro/termwind/src/ValueObjects/Style.php',
         'Termwind\\ValueObjects\\Styles' => __DIR__ . '/..' . '/nunomaduro/termwind/src/ValueObjects/Styles.php',
+        'Tests\\Feature\\ActualizarCategoriaTest' => __DIR__ . '/../..' . '/tests/Feature/ActualizarCategoriaTest.php',
+        'Tests\\Feature\\ActualizarLibroTest' => __DIR__ . '/../..' . '/tests/Feature/ActualizarLibroTest.php',
+        'Tests\\Feature\\ActualizarPrestamoTest' => __DIR__ . '/../..' . '/tests/Feature/ActualizarPrestamoTest.php',
+        'Tests\\Feature\\BuscarLibrosTest' => __DIR__ . '/../..' . '/tests/Feature/BuscarLibrosTest.php',
+        'Tests\\Feature\\CrearCategoriaTest' => __DIR__ . '/../..' . '/tests/Feature/CrearCategoriaTest.php',
+        'Tests\\Feature\\CrearLibroTest' => __DIR__ . '/../..' . '/tests/Feature/CrearLibroTest.php',
+        'Tests\\Feature\\CrearPrestamoTest' => __DIR__ . '/../..' . '/tests/Feature/CrearPrestamoTest.php',
+        'Tests\\Feature\\EliminarCategoriaTest' => __DIR__ . '/../..' . '/tests/Feature/EliminarCategoriaTest.php',
+        'Tests\\Feature\\EliminarLibroTest' => __DIR__ . '/../..' . '/tests/Feature/EliminarLibroTest.php',
+        'Tests\\Feature\\EliminarPrestamoTest' => __DIR__ . '/../..' . '/tests/Feature/EliminarPrestamoTest.php',
         'Tests\\Feature\\ExampleTest' => __DIR__ . '/../..' . '/tests/Feature/ExampleTest.php',
+        'Tests\\Feature\\LibrosPopularesTest' => __DIR__ . '/../..' . '/tests/Feature/LibrosPopularesTest.php',
+        'Tests\\Feature\\ListarCategoriasTest' => __DIR__ . '/../..' . '/tests/Feature/ListarCategoriasTest.php',
+        'Tests\\Feature\\ListarLibrosTest' => __DIR__ . '/../..' . '/tests/Feature/ListarLibrosTest.php',
+        'Tests\\Feature\\ListarPrestamosTest' => __DIR__ . '/../..' . '/tests/Feature/ListarPrestamosTest.php',
+        'Tests\\Feature\\LoginTest' => __DIR__ . '/../..' . '/tests/Feature/LoginTest.php',
+        'Tests\\Feature\\LogoutTest' => __DIR__ . '/../..' . '/tests/Feature/LogoutTest.php',
+        'Tests\\Feature\\RegisterTest' => __DIR__ . '/../..' . '/tests/Feature/RegisterTest.php',
         'Tests\\TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
         'Tests\\Unit\\ExampleTest' => __DIR__ . '/../..' . '/tests/Unit/ExampleTest.php',
         'TheSeer\\Tokenizer\\Exception' => __DIR__ . '/..' . '/theseer/tokenizer/src/Exception.php',
@@ -7714,9 +7748,9 @@ class ComposerStaticInit4d64ddccdf9de299dce6e021428aa3ef
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit4d64ddccdf9de299dce6e021428aa3ef::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit4d64ddccdf9de299dce6e021428aa3ef::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit4d64ddccdf9de299dce6e021428aa3ef::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitd54fe94460cb993e305d25f02a88e45c::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitd54fe94460cb993e305d25f02a88e45c::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitd54fe94460cb993e305d25f02a88e45c::$classMap;
 
         }, null, ClassLoader::class);
     }
