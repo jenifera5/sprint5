@@ -2,7 +2,11 @@
     "openapi": "3.0.0",
     "info": {
         "title": "📚 Biblioteca REST API",
+<<<<<<< HEAD
         "description": "API desarrollada por **Jenifer Alvarez** (Sprint 5 - IT Academy).  \n *\n * Implementa autenticación con **Laravel Passport**, control de acceso por roles  \n * y gestión de **Libros**, **Categorías** y **Préstamos**.  \n * Respuestas JSON estructuradas para integrarse con frontends o sistemas de IA.",
+=======
+        "description": "API desarrollada por **Jenifer Alvarez** (Sprint 5 - IT Academy).  \r\n *\r\n * Implementa autenticación con **Laravel Passport**, control de acceso por roles  \r\n * y gestión de **Libros**, **Categorías** y **Préstamos**.  \r\n * Respuestas JSON estructuradas para integrarse con frontends o sistemas de IA.",
+>>>>>>> feature/register
         "contact": {
             "name": "Jenifer Álvarez",
             "url": "https://github.com/jenifera5"
